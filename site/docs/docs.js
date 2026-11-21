@@ -59,7 +59,7 @@ function updateScores() {
   const best = estimates.indexOf(Math.min(...estimates));
   for (const [index, row] of scores.entries()) {
     row.classList.toggle("preferred", index === best);
-    row.querySelector(".chart-bar").style.setProperty("--fill", `${estimates[index] * 100}%`);
+    row.querySelector("meter").value = estimates[index] * 100;
     row.querySelector("output").textContent = format.format(estimates[index]);
   }
   document.getElementById("latency-weight-value").value = `${weight.value}%`;

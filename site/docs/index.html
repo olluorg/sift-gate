@@ -84,9 +84,9 @@ protocols = [<span class="syntax-string">"chat_completions"</span>, <span class=
   <figure class="routing-chart" data-strategy="LowestLatency">
     <figcaption><strong><code>LowestLatency</code></strong><span>Сглаженная задержка</span></figcaption>
     <div class="chart-rows">
-      <div class="chart-row preferred"><span>Маршрут A</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 30%"></span></span><output data-value="180">180 мс</output></div>
-      <div class="chart-row"><span>Маршрут B</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 50%"></span></span><output data-value="300">300 мс</output></div>
-      <div class="chart-row"><span>Маршрут C</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 96.66666666666667%"></span></span><output data-value="580">580 мс</output></div>
+      <div class="chart-row preferred"><span>Маршрут A</span><meter class="chart-meter" min="0" max="100" value="30" aria-hidden="true"></meter><output data-value="180">180 мс</output></div>
+      <div class="chart-row"><span>Маршрут B</span><meter class="chart-meter" min="0" max="100" value="50" aria-hidden="true"></meter><output data-value="300">300 мс</output></div>
+      <div class="chart-row"><span>Маршрут C</span><meter class="chart-meter" min="0" max="100" value="96.6667" aria-hidden="true"></meter><output data-value="580">580 мс</output></div>
     </div>
     <p class="chart-result">A — самый быстрый маршрут</p>
     <p class="chart-note">Для SSE сравнивается время до первого содержательного события. Для JSON — время до полного ответа. Маршрут без замеров получает возможность собрать статистику.</p>
@@ -94,9 +94,9 @@ protocols = [<span class="syntax-string">"chat_completions"</span>, <span class=
   <figure class="routing-chart" data-strategy="LowestCost">
     <figcaption><strong><code>LowestCost</code></strong><span>Оценочная стоимость запроса</span></figcaption>
     <div class="chart-rows">
-      <div class="chart-row"><span>Маршрут A</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 80%"></span></span><output data-value="0.08">0,08 ₽</output></div>
-      <div class="chart-row"><span>Маршрут B</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 40%"></span></span><output data-value="0.04">0,04 ₽</output></div>
-      <div class="chart-row preferred"><span>Маршрут C</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 20%"></span></span><output data-value="0.02">0,02 ₽</output></div>
+      <div class="chart-row"><span>Маршрут A</span><meter class="chart-meter" min="0" max="100" value="80" aria-hidden="true"></meter><output data-value="0.08">0,08 ₽</output></div>
+      <div class="chart-row"><span>Маршрут B</span><meter class="chart-meter" min="0" max="100" value="40" aria-hidden="true"></meter><output data-value="0.04">0,04 ₽</output></div>
+      <div class="chart-row preferred"><span>Маршрут C</span><meter class="chart-meter" min="0" max="100" value="20" aria-hidden="true"></meter><output data-value="0.02">0,02 ₽</output></div>
     </div>
     <p class="chart-result">C — самый дешёвый маршрут</p>
     <p class="chart-note">Цена включает входные и выходные токены и плату за вызов. Маршруты без сопоставимой цены идут после маршрутов с ценой.</p>
@@ -104,9 +104,9 @@ protocols = [<span class="syntax-string">"chat_completions"</span>, <span class=
   <figure class="routing-chart" data-strategy="Balanced">
     <figcaption><strong><code>Balanced</code></strong><span>Итоговая оценка</span></figcaption>
     <div class="chart-rows">
-      <div class="chart-row"><span>Маршрут A</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 50%"></span></span><output data-value="0.5">0,500</output></div>
-      <div class="chart-row preferred"><span>Маршрут B</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 31.666666666666664%"></span></span><output data-value="0.31666666666666665">0,317</output></div>
-      <div class="chart-row"><span>Маршрут C</span><span class="chart-track" aria-hidden="true"><span class="chart-bar" style="--fill: 50%"></span></span><output data-value="0.5">0,500</output></div>
+      <div class="chart-row"><span>Маршрут A</span><meter class="chart-meter" min="0" max="100" value="50" aria-hidden="true"></meter><output data-value="0.5">0,500</output></div>
+      <div class="chart-row preferred"><span>Маршрут B</span><meter class="chart-meter" min="0" max="100" value="31.6667" aria-hidden="true"></meter><output data-value="0.31666666666666665">0,317</output></div>
+      <div class="chart-row"><span>Маршрут C</span><meter class="chart-meter" min="0" max="100" value="50" aria-hidden="true"></meter><output data-value="0.5">0,500</output></div>
     </div>
     <p class="chart-result" role="status">B — минимальная оценка</p>
     <div class="chart-control" hidden>

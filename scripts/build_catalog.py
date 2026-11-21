@@ -8,6 +8,7 @@ import sys
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
+from hashlib import sha256
 from pathlib import Path
 from urllib.request import Request, urlopen
 
@@ -139,6 +140,17 @@ def main():
         snapshot_path.write_text(json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     shutil.copytree(ROOT / "site", args.out, dirs_exist_ok=True)
     shutil.copy2(ROOT / "sift-gate.ru.example.toml", args.out)
+    docs = args.out / "docs"
+    page = docs / "index.html"
+    html = page.read_text(encoding="utf-8")
+    for name in ("docs.css", "docs.js"):
+        asset = docs / name
+        content = asset.read_bytes()
+        digest = sha256(content).hexdigest()[:12]
+        versioned = asset.with_name(f"{asset.stem}.{digest}{asset.suffix}")
+        versioned.write_bytes(content)
+        html = html.replace(f'"./{name}"', f'"./{versioned.name}"')
+    page.write_text(html, encoding="utf-8")
     (args.out / "catalog.json").write_text(json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(", ".join(f"{provider}: {len(feed['offers'])}" for provider, feed in snapshot["feeds"].items()))
 

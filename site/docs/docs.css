@@ -65,10 +65,12 @@ body.docs-page {
 .chart-rows { display: grid; gap: .48rem; }
 .chart-row { display: grid; grid-template-columns: 5.8rem minmax(0, 1fr) 4.3rem; align-items: center; gap: .45rem; font-size: .875rem; }
 .chart-row output { text-align: right; font-variant-numeric: tabular-nums; }
-.chart-track { display: block; height: .65rem; background: #ebf1ec; border-radius: .2rem; }
-.chart-bar { display: block; width: var(--fill); height: 100%; background: #799487; border-radius: inherit; }
+.chart-meter { display: block; width: 100%; height: .9rem; --bar-color: #799487; }
+.chart-meter::-webkit-meter-bar { background: #ebf1ec; border: 0; border-radius: .2rem; }
+.chart-meter::-webkit-meter-optimum-value { background: var(--bar-color); border-radius: .2rem; }
+.chart-meter::-moz-meter-bar { background: var(--bar-color); border-radius: .2rem; }
 .chart-row.preferred { color: #164e33; font-weight: 750; }
-.chart-row.preferred .chart-bar { background: #25704d; }
+.chart-row.preferred .chart-meter { --bar-color: #25704d; }
 .routing-chart .chart-result { margin: .7rem 0 0; font-size: .875rem; color: #164e33; font-weight: 750; }
 .routing-chart .chart-note { margin: .65rem 0 0; color: var(--muted); font-size: .875rem; }
 .chart-control { margin-top: .75rem; padding-top: .65rem; border-top: 1px solid var(--line); }
