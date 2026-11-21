@@ -3,65 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121713">
+  <meta name="theme-color" content="#f8faf7">
   <title>Документация · Sift Gate</title>
   <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="./docs.css">
+  <script type="module" src="./docs.js"></script>
 </head>
-<body>
+<body class="docs-page">
+<a class="skip" href="#content">К содержимому</a>
 <header class="top"><div class="wrap bar"><a class="brand" href="../"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a aria-current="page" href="../docs/">Документация</a><a href="../providers/">Провайдеры</a><a href="../models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
-<main class="wrap docs">
-<section class="intro"><h1>Документация</h1><p class="lead">Подключите Sift Gate к Rust-приложению и настройте маршрутизацию LLM-запросов.</p><a href="../api/sift_gate/">Справочник API Rust</a></section>
-<nav class="actions" aria-label="Разделы документации"><a href="#setup">Подключение</a><a href="#requests">Запросы и стриминг</a><a href="#routing">Маршрутизация и сбои</a><a href="#extensions">Расширения</a></nav>
+<main class="wrap docs-layout" id="content">
+  <aside class="docs-sidebar">
+    <nav aria-label="На этой странице">
+      <p class="docs-nav-title">Руководство</p>
+      <a href="#setup">Подключение</a>
+      <a href="#requests">Запросы и стриминг</a>
+      <a href="#routing">Маршрутизация и сбои</a>
+      <a href="#extensions">Расширения</a>
+    </nav>
+    <a class="docs-api" href="../api/sift_gate/">Справочник API Rust</a>
+  </aside>
+  <article class="docs-content">
+    <header class="docs-intro">
+      <h1>Начало работы<br class="docs-break"> с Sift Gate</h1>
+      <p>Подключите библиотеку к Rust-приложению, настройте провайдера и отправьте первый запрос.</p>
+      <div class="docs-actions">
+        <a class="docs-primary" href="#setup">Подключить библиотеку</a>
+        <a class="docs-outline" href="../api/sift_gate/">Справочник API</a>
+      </div>
+    </header>
 <section id="setup">
 <h2>Подключение</h2>
 <p>Клонируйте репозиторий рядом с приложением и добавьте зависимости в его <code>Cargo.toml</code>. Для сборки нужен Rust с поддержкой edition 2024.</p>
-<pre><code>git clone https://github.com/olluorg/sift-gate.git</code></pre>
-<pre><code>[dependencies]
-sift-gate = { path = "../sift-gate" }
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-serde_json = "1"</code></pre>
+<figure class="code-block"><figcaption><span>Терминал</span><button type="button" hidden>Копировать</button></figcaption><pre tabindex="0" aria-label="Терминал"><code>git clone https://github.com/olluorg/sift-gate.git</code></pre></figure>
+<figure class="code-block"><figcaption><span>Cargo.toml</span><button type="button" hidden>Копировать</button></figcaption><pre tabindex="0" aria-label="Cargo.toml"><code><span class="syntax-section">[dependencies]</span>
+sift-gate = { path = <span class="syntax-string">"../sift-gate"</span> }
+tokio = { version = <span class="syntax-string">"1"</span>, features = [<span class="syntax-string">"macros"</span>, <span class="syntax-string">"rt-multi-thread"</span>] }
+serde_json = <span class="syntax-string">"1"</span></code></pre></figure>
+<h3>Настройте маршрут</h3>
 <p>Создайте <code>sift-gate.toml</code> в рабочем каталоге приложения. Этот минимальный конфиг направляет алиас <code>claude</code> в AITUNNEL. Задайте <code>AITUNNEL_API_KEY</code> в окружении перед запуском.</p>
-<pre><code>strategy = "Balanced"
+<figure class="code-block"><figcaption><span>sift-gate.toml</span><button type="button" hidden>Копировать</button></figcaption><pre tabindex="0" aria-label="sift-gate.toml"><code>strategy = <span class="syntax-string">"Balanced"</span>
 
-[providers.aitunnel]
-kind = "ai_tunnel"
-api_key_env = "AITUNNEL_API_KEY"
+<span class="syntax-section">[providers.aitunnel]</span>
+kind = <span class="syntax-string">"ai_tunnel"</span>
+api_key_env = <span class="syntax-string">"AITUNNEL_API_KEY"</span>
 
-[[models.claude]]
-provider = "aitunnel"
-model = "claude-sonnet-5.5"
-protocols = ["chat_completions", "anthropic_messages"]</code></pre>
+<span class="syntax-section">[[models.claude]]</span>
+provider = <span class="syntax-string">"aitunnel"</span>
+model = <span class="syntax-string">"claude-sonnet-5.5"</span>
+protocols = [<span class="syntax-string">"chat_completions"</span>, <span class="syntax-string">"anthropic_messages"</span>]</code></pre></figure>
 <p>Один алиас может иметь несколько записей <code>[[models.claude]]</code>. У каждой укажите провайдера, его API ID модели и допустимые протоколы. <a href="../sift-gate.ru.example.toml">Пример с AITUNNEL и ProxyAPI</a> · <a href="../providers/">Список провайдеров</a></p>
 </section>
 <section id="requests">
 <h2>Запросы и стриминг</h2>
-<pre><code>use serde_json::json;
-use sift_gate::{Config, Error, ProviderResponse, SiftGate};
+<figure class="code-block"><figcaption><span>src/main.rs</span><button type="button" hidden>Копировать</button></figcaption><pre tabindex="0" aria-label="src/main.rs"><code><span class="syntax-keyword">use</span> serde_json::json;
+<span class="syntax-keyword">use</span> sift_gate::{Config, Error, ProviderResponse, SiftGate};
 
 #[tokio::main]
-async fn main() -&gt; Result&lt;(), Error&gt; {
-    let gate = SiftGate::new(Config::from_file("sift-gate.toml")?)?;
-    let result = gate.chat_completions(json!({
-        "model": "claude",
-        "messages": [{"role": "user", "content": "Привет!"}],
-        "max_completion_tokens": 256
-    })).await?;
+<span class="syntax-keyword">async</span> <span class="syntax-keyword">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+    <span class="syntax-keyword">let</span> gate = SiftGate::new(Config::from_file(<span class="syntax-string">"sift-gate.toml"</span>)?)?;
+    <span class="syntax-keyword">let</span> result = gate.chat_completions(json!({
+        <span class="syntax-string">"model"</span>: <span class="syntax-string">"claude"</span>,
+        <span class="syntax-string">"messages"</span>: [{<span class="syntax-string">"role"</span>: <span class="syntax-string">"user"</span>, <span class="syntax-string">"content"</span>: <span class="syntax-string">"Привет!"</span>}],
+        <span class="syntax-string">"max_completion_tokens"</span>: <span class="syntax-number">256</span>
+    })).<span class="syntax-keyword">await</span>?;
 
-    println!("{} / {}", result.provider, result.model);
-    if let ProviderResponse::Json(body) = result.response {
-        println!("{body}");
+    println!(<span class="syntax-string">"{} / {}"</span>, result.provider, result.model);
+    <span class="syntax-keyword">if</span> <span class="syntax-keyword">let</span> ProviderResponse::Json(body) = result.response {
+        println!(<span class="syntax-string">"{body}"</span>);
     }
     Ok(())
-}</code></pre>
+}</code></pre></figure>
+<h3>Anthropic и SSE</h3>
 <p>Для Anthropic вызывайте <code>gate.messages(body)</code> с полем <code>max_tokens</code>. Библиотека подставляет API ID модели и передаёт остальные поля провайдеру. При <code>"stream": true</code> результат приходит как <code>ProviderResponse::Stream</code>. Читайте события через <code>futures_util::StreamExt::next</code> и обрабатывайте ошибки каждого события. Переиспользуйте экземпляр <code>SiftGate</code>, чтобы сохранить кэш и телеметрию.</p>
 </section>
 <section id="routing">
 <h2>Маршрутизация и сбои</h2>
-<dl>
-<dt><code>LowestCost</code></dt><dd>Сравнивает оценочную стоимость запроса. Маршруты без сопоставимой цены идут после маршрутов с ценой. Для смешанных RUB и USD задайте <code>rub_per_usd</code>.</dd>
-<dt><code>LowestLatency</code></dt><dd>Сравнивает сглаженную задержку. Для SSE используется время до первого содержательного события, для JSON — время до полного ответа.</dd>
-<dt><code>Balanced</code></dt><dd>Смешивает оценки цены и задержки. Доля задержки задаётся параметром <code>latency_weight</code>.</dd>
+<dl class="strategy-list">
+<div><dt><code>LowestCost</code></dt><dd>Сравнивает оценочную стоимость запроса. Маршруты без сопоставимой цены идут после маршрутов с ценой. Для смешанных RUB и USD задайте <code>rub_per_usd</code>.</dd></div>
+<div><dt><code>LowestLatency</code></dt><dd>Сравнивает сглаженную задержку. Для SSE используется время до первого содержательного события, для JSON — время до полного ответа.</dd></div>
+<div><dt><code>Balanced</code></dt><dd>Смешивает оценки цены и задержки. Доля задержки задаётся параметром <code>latency_weight</code>.</dd></div>
 </dl>
+<h3>Переключение при сбое</h3>
 <p>При временном сбое роутер может попробовать следующий подходящий маршрут. После первого выданного SSE-события обрыв возвращается как ошибка потока. <code>timeout_ms</code> применяется к каждой попытке. Чтобы не повторять запрос после таймаута, задайте <code>retry_timeouts = false</code>.</p>
 <p>Метод <code>gate.telemetry(provider, model, protocol)</code> возвращает замеры конкретного маршрута. Используйте API ID модели провайдера.</p>
 </section>
@@ -69,6 +92,7 @@ async fn main() -&gt; Result&lt;(), Error&gt; {
 <h2>Расширения</h2>
 <p>Для OpenAI-совместимого API используйте <code>kind = "compatible"</code> с <code>base_url</code> и <code>api_key_env</code>. Для нестандартного транспорта или авторизации реализуйте <a href="../api/sift_gate/trait.ProviderAdapter.html"><code>ProviderAdapter</code></a> и зарегистрируйте адаптер через <code>SiftGate::with_extensions</code>. Для собственной стратегии реализуйте <a href="../api/sift_gate/trait.ScoringPolicy.html"><code>ScoringPolicy</code></a>.</p>
 </section>
+  </article>
 </main>
 <footer class="wrap footer"><a class="brand" href="../">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
 </body>

@@ -55,11 +55,6 @@ td:first-child { min-width: 10rem; overflow-wrap: anywhere; }
 td strong { display: block; }
 td:not(:first-child) { white-space: nowrap; }
 .footer { border-top: 1px solid var(--line); }
-.docs { max-width: 55rem; }
-.docs section + section, .docs nav + section { margin-top: 2.75rem; }
-.docs pre { overflow: auto; padding: 1rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--panel); }
-.docs dt { font-weight: 650; margin-top: .6rem; }
-.docs dd { margin: 0; }
 [hidden] { display: none !important; }
 @media (max-width: 48rem) { .hero, .cards, .links { grid-template-columns: 1fr; } .controls { grid-template-columns: 1fr 1fr; } .controls > label:first-child { grid-column: 1 / -1; } .controls.tokens > label:first-child { grid-column: auto; } }
 @media (max-width: 27rem) { .controls.tokens { grid-template-columns: 1fr; } nav { gap: .8rem; } }
