@@ -3,27 +3,86 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121713">
-  <title>Sift Gate</title>
+  <meta name="theme-color" content="#f5f7fc">
+  <meta name="description" content="Sift Gate маршрутизирует LLM-запросы между провайдерами. Сравните цены моделей и подключите шлюз к своему приложению.">
+  <title>Sift Gate — шлюз для LLM API</title>
   <link rel="stylesheet" href="./style.css">
-
 </head>
-<body >
-<header class="top"><div class="wrap bar"><a class="brand" href="./"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a href="./docs/">Документация</a><a  href="./providers/">Провайдеры</a><a  href="./models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
-<main class="wrap">
-<section class="hero"><div><p class="eyebrow">Rust · LLM API</p><h1>Один интерфейс.<br>Несколько LLM API.</h1>
-<p class="lead">Sift Gate маршрутизирует запросы по цене и задержке и переключается на доступного провайдера при сбое.</p>
-<div class="actions"><a class="button" href="./models/">Сравнить цены моделей</a><a class="button secondary" href="./providers/">Посмотреть провайдеров</a></div></div>
-<div class="snippet"><p class="eyebrow">sift-gate.toml</p><pre><code><span class="muted">[providers.aitunnel]</span>
-kind = <span>"ai_tunnel"</span>
-api_key_env = <span>"AITUNNEL_API_KEY"</span>
-
-<span class="muted">[[models.claude]]</span>
-provider = <span>"aitunnel"</span>
-model = <span>"claude-sonnet-5.5"</span>
-protocols = [<span>"chat_completions"</span>, <span>"anthropic_messages"</span>]</code></pre></div>
-</section>
-<section class="links"><article><h2>Провайдеры</h2><p>Карты российских банков, способы оплаты, протоколы и статус подключения к Sift Gate.</p><a href="./providers/">Открыть список провайдеров</a></article><article><h2>Модели</h2><p>Поиск по версиям моделей и сравнение стоимости запроса у разных провайдеров.</p><a href="./models/">Открыть каталог моделей</a></article></section></main>
+<body>
+<a class="skip" href="#content">К содержимому</a>
+<header class="top"><div class="wrap bar"><a class="brand" href="./" aria-current="page"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a href="./docs/">Документация</a><a href="./providers/">Провайдеры</a><a href="./models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
+<main class="wrap home" id="content">
+  <section class="hero" aria-labelledby="hero-title">
+    <div>
+      <p class="eyebrow">Шлюз для LLM API на Rust</p>
+      <h1 id="hero-title">Один шлюз для <em>LLM-провайдеров</em></h1>
+      <p class="lead">Подключите Rust-библиотеку к приложению. Sift Gate выбирает маршрут с учётом цены и задержки и переключается на доступного провайдера при сбое.</p>
+      <div class="actions">
+        <a class="button" href="./docs/">Начать работу</a>
+        <a class="button secondary" href="./models/">Сравнить цены моделей</a>
+      </div>
+    </div>
+    <figure class="routing-flow">
+      <figcaption>Как проходит запрос</figcaption>
+      <div class="flow-node flow-client">Ваше приложение <small>Rust</small></div>
+      <div class="flow-node flow-gate">Sift Gate <small>Цена · задержка</small></div>
+      <ul class="flow-routes">
+        <li class="flow-node">Основной <small>Провайдер</small></li>
+        <li class="flow-node">Резервный <small>При сбое</small></li>
+      </ul>
+    </figure>
+  </section>
+  <section class="home-section" aria-labelledby="routing-title">
+    <h2 id="routing-title">Как шлюз выбирает маршрут</h2>
+    <p class="lead">Клиент передаёт алиас модели, например <code>claude</code>. В TOML этому алиасу соответствуют маршруты с конкретными моделями, провайдерами и протоколами.</p>
+    <dl class="strategy-grid">
+      <div><dt><code>LowestCost</code></dt><dd>Выбирает маршрут с наименьшей расчётной стоимостью запроса.</dd></div>
+      <div><dt><code>LowestLatency</code></dt><dd>Учитывает время до первого содержательного события для стриминга и полную задержку для JSON-ответов.</dd></div>
+      <div><dt><code>Balanced</code></dt><dd>Учитывает цену и задержку одновременно. Их относительный вес задаётся в конфигурации.</dd></div>
+    </dl>
+    <p>При лимите запросов, ошибке сервера провайдера или сбое соединения шлюз может попробовать следующий маршрут. Для SSE переключение возможно до выдачи первого события клиенту.</p>
+    <a href="./docs/#routing">Подробнее о маршрутизации и сбоях</a>
+  </section>
+  <section class="home-section" aria-labelledby="connect-title">
+    <h2 id="connect-title">Как подключиться</h2>
+    <div class="connect-grid">
+      <div>
+        <p>Добавьте Sift Gate как зависимость Rust. Укажите провайдеров и модели в TOML, а ключи передайте через переменные окружения.</p>
+        <ul class="protocol-list">
+          <li>OpenAI Chat Completions <code>gate.chat_completions(...)</code></li>
+          <li>Anthropic Messages <code>gate.messages(...)</code></li>
+        </ul>
+        <p>Оба протокола поддерживают JSON-ответы и потоковую передачу через SSE.</p>
+        <div class="actions">
+          <a class="button" href="./docs/#setup">Подключить Rust-библиотеку</a>
+        </div>
+      </div>
+      <figure class="code-block connect-example">
+        <figcaption>Пример запроса из Rust</figcaption>
+        <pre tabindex="0"><code>let gate = SiftGate::new(Config::from_file("sift-gate.toml")?)?;
+let result = gate.messages(serde_json::json!({
+    "model": "claude",
+    "max_tokens": 256,
+    "messages": [{"role": "user", "content": "Привет!"}]
+})).await?;</code></pre>
+        <p>Настройте алиас <code>claude</code> в TOML. <a href="./docs/#requests">Полный пример</a></p>
+      </figure>
+    </div>
+  </section>
+  <section class="home-section" aria-labelledby="catalog-title">
+    <h2 id="catalog-title">Каталоги</h2>
+    <div class="catalog-grid">
+      <a class="section-card" href="./providers/">
+        <h3>Провайдеры</h3>
+        <p>Проверьте, какие сервисы принимают карты российских банков и какие протоколы доступны при подключении к Sift Gate.</p>
+      </a>
+      <a class="section-card" href="./models/">
+        <h3>Модели</h3>
+        <p>Найдите нужную версию модели и сравните расчётную стоимость по заданному числу входных и выходных токенов.</p>
+      </a>
+    </div>
+  </section>
+</main>
 <footer class="wrap footer"><a class="brand" href="./">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
 </body>
 </html>

@@ -1,16 +1,3 @@
-body.docs-page {
-  --bg: #f8faf7;
-  --ink: #16231e;
-  --muted: #4e6056;
-  --line: #d7e1d9;
-  --accent: #17633e;
-  color-scheme: light;
-}
-.docs-page a:hover { color: #11472e; }
-.docs-page .top { background: #fff; }
-.docs-page .mark { background: #194e36; color: #fff; }
-.skip { position: absolute; z-index: 2; inset: .5rem auto auto .5rem; transform: translateY(-150%); padding: .4rem .8rem; background: white; }
-.skip:focus { transform: none; }
 .docs-layout {
   display: grid;
   grid-template-columns: 14rem minmax(0, 49rem);
@@ -23,37 +10,31 @@ body.docs-page {
 .docs-nav-title { margin: 0 0 .75rem .7rem; font-size: .875rem; font-weight: 750; }
 .docs-sidebar nav a { border-left: 2px solid transparent; border-radius: 0 .35rem .35rem 0; padding: .45rem .6rem; font-size: .925rem; }
 .docs-sidebar nav a:hover, .docs-sidebar nav a[aria-current="location"] {
-  border-color: #2b7652;
-  color: #164e33;
-  background: #e7f1e8;
+  border-color: var(--accent);
+  color: var(--accent-hover);
+  background: var(--accent-soft);
   text-decoration: none;
 }
 .docs-api { display: block; margin: 1.1rem 0 0 .7rem; font-size: .925rem; font-weight: 650; }
 .docs-intro {
   padding: clamp(1.5rem, 4vw, 3.15rem);
-  border: 1px solid #d2e5d7;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: radial-gradient(ellipse at 100% 4%, #cde8d4, transparent 66%), #eef5ed;
+  background: radial-gradient(ellipse at 100% 4%, #d5dfff, transparent 66%), var(--accent-soft);
 }
 .docs-intro h1 { font-size: clamp(2.1rem, 4.9vw, 4.25rem); letter-spacing: -.055em; }
-.docs-intro p { max-width: 32rem; font-size: clamp(1rem, 1.6vw, 1.2rem); color: #365144; margin: .95rem 0 1.2rem; }
+.docs-intro p { max-width: 32rem; font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--muted); margin: .95rem 0 1.2rem; }
 .docs-actions { display: flex; flex-wrap: wrap; gap: .55rem; }
 .docs-actions a { padding: .54rem .82rem; border-radius: .45rem; font-weight: 680; text-decoration: none; }
-.docs-actions .docs-primary { color: #fff; background: #195139; border: 1px solid #195139; }
-.docs-actions .docs-primary:hover { color: #fff; background: #123c2a; }
-.docs-outline { background: #fff8; border: 1px solid #9cb8a7; }
+.docs-actions .docs-primary { color: #fff; background: var(--accent); border: 1px solid var(--accent); }
+.docs-actions .docs-primary:hover { color: #fff; background: var(--accent-hover); }
+.docs-outline { background: #fff8; border: 1px solid var(--line); }
 .docs-content section { margin-top: 2.4rem; scroll-margin-top: 1.5rem; }
 .docs-content section + section { border-top: 1px solid var(--line); padding-top: 2rem; }
 .docs-content h2 { font-size: clamp(1.6rem, 3.5vw, 2.05rem); letter-spacing: -.025em; }
 .docs-content h3 { margin: 1.6rem 0 .35rem; font-size: 1.15rem; }
 .docs-content p { line-height: 1.68; }
-.docs-content p code, .docs-content dt code { background: #eaf0e9; color: #16482f; padding: .12em .28em; border-radius: .25em; font-size: .91em; overflow-wrap: anywhere; }
-.code-block { margin: .95rem 0; border-radius: .7rem; overflow: hidden; background: #14231d; color: #e6efe8; }
-.code-block figcaption { display: flex; min-height: 2.65rem; align-items: center; justify-content: space-between; padding: .35rem 1rem; border-bottom: 1px solid #355045; background: #1b3027; color: #e2eee6; font: .875rem ui-monospace, monospace; }
-.code-block button { cursor: pointer; font: inherit; font-family: system-ui, sans-serif; color: #f0f8f1; min-width: 7.5rem; background: transparent; border: 1px solid #678579; border-radius: .35rem; padding: .18rem .5rem; }
-.code-block button:hover { background: #345345; }
-.code-block pre { margin: 0; padding: .9rem 1rem; overflow: auto; font: .9rem/1.6 ui-monospace, Consolas, monospace; color-scheme: dark; }
-.code-block pre:focus-visible { outline-offset: -4px; }
+.docs-content p code, .docs-content dt code { background: var(--accent-soft); color: var(--accent-hover); padding: .12em .28em; border-radius: .25em; font-size: .91em; overflow-wrap: anywhere; }
 .syntax-string { color: #b7e895; }
 .syntax-keyword { color: #f5bfda; }
 .syntax-section { color: #a2d7f5; }
@@ -65,18 +46,18 @@ body.docs-page {
 .chart-rows { display: grid; gap: .48rem; }
 .chart-row { display: grid; grid-template-columns: 5.8rem minmax(0, 1fr) 4.3rem; align-items: center; gap: .45rem; font-size: .875rem; }
 .chart-row output { text-align: right; font-variant-numeric: tabular-nums; }
-.chart-meter { display: block; width: 100%; height: .9rem; --bar-color: #799487; }
-.chart-meter::-webkit-meter-bar { background: #ebf1ec; border: 0; border-radius: .2rem; }
+.chart-meter { display: block; width: 100%; height: .9rem; --bar-color: #687ba5; }
+.chart-meter::-webkit-meter-bar { background: #edf0f7; border: 0; border-radius: .2rem; }
 .chart-meter::-webkit-meter-optimum-value { background: var(--bar-color); border-radius: .2rem; }
 .chart-meter::-moz-meter-bar { background: var(--bar-color); border-radius: .2rem; }
-.chart-row.preferred { color: #164e33; font-weight: 750; }
-.chart-row.preferred .chart-meter { --bar-color: #25704d; }
-.routing-chart .chart-result { margin: .7rem 0 0; font-size: .875rem; color: #164e33; font-weight: 750; }
+.chart-row.preferred { color: var(--accent-hover); font-weight: 750; }
+.chart-row.preferred .chart-meter { --bar-color: var(--accent); }
+.routing-chart .chart-result { margin: .7rem 0 0; font-size: .875rem; color: var(--accent-hover); font-weight: 750; }
 .routing-chart .chart-note { margin: .65rem 0 0; color: var(--muted); font-size: .875rem; }
 .chart-control { margin-top: .75rem; padding-top: .65rem; border-top: 1px solid var(--line); }
 .chart-control label, #weight-description { display: flex; justify-content: space-between; gap: .5rem; }
 .chart-control label { font-weight: 650; font-size: .9rem; }
-.chart-control input { display: block; appearance: auto; accent-color: #25704d; padding: 0; margin: .4rem 0; }
+.chart-control input { display: block; appearance: auto; accent-color: var(--accent); padding: 0; margin: .4rem 0; }
 #weight-description { color: var(--muted); font-size: .85rem; }
 .docs-page .footer { color: var(--muted); }
 @media (max-width: 56rem) {
