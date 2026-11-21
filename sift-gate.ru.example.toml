@@ -1,0 +1,21 @@
+strategy = "LowestCost"
+
+[providers.proxyapi]
+kind = "compatible"
+base_url = "https://api.proxyapi.ru/v1"
+api_key_env = "PROXYAPI_API_KEY"
+currency = "RUB"
+
+[providers.aitunnel]
+kind = "ai_tunnel"
+api_key_env = "AITUNNEL_API_KEY"
+
+[[models.claude]]
+provider = "proxyapi"
+model = "anthropic/claude-sonnet-5-5"
+protocols = ["chat_completions", "anthropic_messages"]
+
+[[models.claude]]
+provider = "aitunnel"
+model = "claude-sonnet-5.5"
+protocols = ["chat_completions", "anthropic_messages"]

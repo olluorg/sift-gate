@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121713">
+  <title>Модели · Sift Gate</title>
+  <link rel="stylesheet" href="../style.css">
+  <script type="module" src="../app.js"></script>
+</head>
+<body data-page="models">
+<header class="top"><div class="wrap bar"><a class="brand" href="../"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a  href="../providers/">Провайдеры</a><a aria-current="page" href="../models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
+<main class="wrap">
+<section class="intro"><h1>Каталог моделей</h1><p class="lead">Сравните стоимость текстового запроса у провайдеров одной версии модели.</p></section>
+<section class="controls" aria-label="Фильтры каталога">
+<label>Поиск модели <input type="search" id="query" placeholder="Например, Claude Sonnet 5.5"></label>
+<label>Протокол <select id="protocol"><option value="">Все</option><option value="chat">Chat Completions</option><option value="messages">Anthropic Messages</option></select></label>
+<label class="check"><input type="checkbox" id="cards"> Оплата картой РФ</label>
+</section>
+<section class="controls tokens" aria-label="Параметры запроса">
+<label>Токены на входе <input id="input-tokens" type="number" min="0" max="1000000000" step="1" value="1000"></label>
+<label>Токены на выходе <input id="output-tokens" type="number" min="0" max="1000000000" step="1" value="500"></label>
+<label>Курс, ₽ за $1 <input type="number" id="rate" min="0.01" max="1000000" step="any"></label>
+</section>
+<details class="method"><summary>Источники и метод расчёта</summary><p>В расчёт входят входные и выходные токены по стандартным ставкам и фиксированная плата за вызов. Кэш, пакетные скидки, подписки и надбавки за большой контекст могут изменить сумму. Минимальная цена определяется в пределах одной версии и выбранных фильтров. Цены RUB и USD сравниваются по указанному курсу. Без курса предложения разных валют отображаются без общего победителя.</p><ul id="sources"></ul></details>
+<p id="status" class="summary" role="status">Загрузка каталога…</p><div id="results"></div><button class="button secondary" type="button" id="more" hidden>Показать ещё</button>
+<noscript>Для поиска моделей и расчёта цен нужен JavaScript.</noscript></main>
+<footer class="wrap footer"><a class="brand" href="../">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
+</body>
+</html>

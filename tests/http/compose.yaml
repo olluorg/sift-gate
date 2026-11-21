@@ -1,0 +1,13 @@
+services:
+  provider-mocks:
+    image: python:3.12-slim
+    command: ["python", "/mock.py", "--serve"]
+    volumes:
+      - ./mock.py:/mock.py:ro
+    ports:
+      - "127.0.0.1:18080:8080"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=1)"]
+      interval: 2s
+      timeout: 2s
+      retries: 10

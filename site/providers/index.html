@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121713">
+  <title>Провайдеры · Sift Gate</title>
+  <link rel="stylesheet" href="../style.css">
+  <script type="module" src="../app.js"></script>
+</head>
+<body data-page="providers">
+<header class="top"><div class="wrap bar"><a class="brand" href="../"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a aria-current="page" href="../providers/">Провайдеры</a><a  href="../models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
+<main class="wrap">
+<section class="intro"><h1>Провайдеры</h1><p class="lead">Условия оплаты, протоколы и способы подключения к Sift Gate.</p></section>
+<section class="controls" aria-label="Фильтры провайдеров">
+<label>Поиск <input type="search" id="query" placeholder="Например, ProxyAPI"></label>
+<label>Протокол <select id="protocol"><option value="">Все</option><option value="chat">Chat Completions</option><option value="messages">Anthropic Messages</option></select></label>
+<label class="check"><input type="checkbox" id="cards"> Оплата картой РФ</label>
+</section>
+<p id="status" class="summary" role="status">Загрузка списка…</p><div id="results" class="cards"></div>
+<noscript>Для фильтрации провайдеров нужен JavaScript.</noscript></main>
+<footer class="wrap footer"><a class="brand" href="../">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
+</body>
+</html>

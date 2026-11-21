@@ -1,0 +1,36 @@
+strategy = "Balanced"
+timeout_ms = 60000
+cooldown_ms = 30000
+catalog_ttl_ms = 300000
+ewma_alpha = 0.25
+latency_weight = 0.5
+retry_timeouts = true
+# Example only. Set the rate for your account before comparing RUB and USD.
+rub_per_usd = 100.0
+
+[providers.openrouter]
+kind = "open_router"
+api_key_env = "OPENROUTER_API_KEY"
+
+[providers.routerai]
+kind = "router_ai"
+api_key_env = "ROUTERAI_API_KEY"
+
+[providers.polza]
+kind = "polza"
+api_key_env = "POLZA_API_KEY"
+
+[[models.claude]]
+provider = "openrouter"
+model = "anthropic/claude-sonnet-4.6"
+protocols = ["chat_completions", "anthropic_messages"]
+
+[[models.claude]]
+provider = "routerai"
+model = "anthropic/claude-sonnet-4.6"
+protocols = ["chat_completions", "anthropic_messages"]
+
+[[models.claude]]
+provider = "polza"
+model = "anthropic/claude-sonnet-4.6"
+protocols = ["chat_completions", "anthropic_messages"]

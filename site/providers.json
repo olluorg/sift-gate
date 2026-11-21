@@ -1,0 +1,539 @@
+[
+  {
+    "id": "routerai",
+    "name": "RouterAI",
+    "website": "https://routerai.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Карты РФ, СБП, счёт для организаций. Сайт заявляет произвольную сумму пополнения.",
+    "status": "built-in",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://routerai.ru/api/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://routerai.ru/"
+      },
+      {
+        "label": "Оферта",
+        "url": "https://routerai.ru/terms"
+      },
+      {
+        "label": "Chat Completions",
+        "url": "https://routerai.ru/docs/guides"
+      },
+      {
+        "label": "Messages",
+        "url": "https://routerai.ru/pages/factory-droid-routerai"
+      },
+      {
+        "label": "Модель",
+        "url": "https://routerai.ru/models/anthropic/claude-sonnet-4.6"
+      }
+    ]
+  },
+  {
+    "id": "polza",
+    "name": "Polza.ai",
+    "website": "https://polza.ai",
+    "referral": null,
+    "card": true,
+    "payment": "Карты РФ, СБП, счёт для организаций. От 100 ₽.",
+    "status": "built-in",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://polza.ai/api/v1",
+    "sources": [
+      {
+        "label": "Оплата и API",
+        "url": "https://polza.ai/providers/anthropic"
+      },
+      {
+        "label": "Минимум",
+        "url": "https://polza.ai/collections/text"
+      },
+      {
+        "label": "Модель",
+        "url": "https://polza.ai/models/anthropic/claude-sonnet-4.6"
+      }
+    ]
+  },
+  {
+    "id": "proxyapi",
+    "name": "ProxyAPI",
+    "website": "https://proxyapi.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Карта российского банка, СБП. Для компаний доступен счёт. Документация говорит о произвольной сумме пополнения.",
+    "status": "config",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://api.proxyapi.ru/v1",
+    "sources": [
+      {
+        "label": "Биллинг",
+        "url": "https://www.proxyapi.ru/docs/balance"
+      },
+      {
+        "label": "Оплата и модели",
+        "url": "https://proxyapi.ru/models/anthropic"
+      },
+      {
+        "label": "Chat Completions",
+        "url": "https://proxyapi.ru/docs/api-overview"
+      },
+      {
+        "label": "Messages",
+        "url": "https://proxyapi.ru/docs/messages"
+      }
+    ]
+  },
+  {
+    "id": "aitunnel",
+    "name": "AITUNNEL",
+    "website": "https://aitunnel.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Российские Visa, Mastercard, «Мир», СБП. От 500 ₽.",
+    "status": "built-in",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://api.aitunnel.ru/v1",
+    "sources": [
+      {
+        "label": "Карты",
+        "url": "https://aitunnel.ru/faq/kak-oplatit-glm-4-7"
+      },
+      {
+        "label": "Минимум",
+        "url": "https://aitunnel.ru/faq"
+      },
+      {
+        "label": "API",
+        "url": "https://aitunnel.ru/docs"
+      },
+      {
+        "label": "Messages",
+        "url": "https://aitunnel.ru/docs/claude-code"
+      },
+      {
+        "label": "Модели",
+        "url": "https://aitunnel.ru/docs/end-users"
+      },
+      {
+        "label": "SSE",
+        "url": "https://aitunnel.ru/docs/streaming"
+      }
+    ]
+  },
+  {
+    "id": "ai-gateway",
+    "name": "AI Gateway (ai-gatewey.ru)",
+    "website": "https://ai-gatewey.ru",
+    "referral": null,
+    "card": true,
+    "payment": "«Мир», Visa и Mastercard через ЮKassa, СБП, счёт для организаций.",
+    "status": "researched",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://ai-gatewey.ru/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://ai-gatewey.ru/"
+      },
+      {
+        "label": "API",
+        "url": "https://ai-gatewey.ru/docs/api-reference"
+      },
+      {
+        "label": "Модель",
+        "url": "https://ai-gatewey.ru/models/anthropic/claude-sonnet-5.5"
+      }
+    ]
+  },
+  {
+    "id": "caila",
+    "name": "Caila",
+    "website": "https://caila.io",
+    "referral": null,
+    "card": true,
+    "payment": "Карты РФ для физлиц от 100 ₽, счёт для организаций.",
+    "status": "researched",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://caila.io/api/adapters/openai",
+    "sources": [
+      {
+        "label": "Оплата и OpenAI API",
+        "url": "https://caila.io/"
+      },
+      {
+        "label": "Messages",
+        "url": "https://docs.caila.io/hub/api/anthropic-provider/"
+      }
+    ]
+  },
+  {
+    "id": "vsegpt",
+    "name": "VseGPT",
+    "website": "https://vsegpt.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Карты РФ, СБП. Подписка от 199 ₽ за 30 дней плюс стоимость запросов. Для старших Claude нужен профтариф, 399 ₽ за 30 дней или 99 ₽ за 3 дня.",
+    "status": "researched",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://api.vsegpt.ru/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://vsegpt.ru/"
+      },
+      {
+        "label": "Тарифы",
+        "url": "https://vsegpt.ru/Docs/Tariffs"
+      },
+      {
+        "label": "API",
+        "url": "https://vsegpt.ru/Docs/API"
+      }
+    ]
+  },
+  {
+    "id": "gptunnel",
+    "name": "GPTunneL",
+    "website": "https://gptunnel.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Карта российского банка или СБП от 50 ₽ на персональный баланс. Документация рекомендует бизнес-счёт для постоянного использования API.",
+    "status": "researched",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://gptunnel.ru/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://www.gptunnel.ru/ru/model/claudel-ot-anthropic"
+      },
+      {
+        "label": "Пополнение",
+        "url": "https://www.gptunnel.ru/ru/documents/operating-instructions"
+      },
+      {
+        "label": "Старт API",
+        "url": "https://docs.gptunnel.ru/"
+      },
+      {
+        "label": "Chat Completions",
+        "url": "https://docs.gptunnel.ru/api/chat-completions/"
+      },
+      {
+        "label": "Messages",
+        "url": "https://docs.gptunnel.ru/api/anthropic-messages/"
+      }
+    ]
+  },
+  {
+    "id": "selectel",
+    "name": "Selectel ИИ-роутер",
+    "website": "https://promo.selectel.ru/ai-router",
+    "referral": null,
+    "card": true,
+    "payment": "Общий баланс от 200 ₽, «Мир» и российские Visa/Mastercard.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://api.selectel.ru/aig/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://docs.selectel.ru/balance-and-payments/manage/top-up-balance/"
+      },
+      {
+        "label": "API",
+        "url": "https://docs.selectel.ru/ai-router/quickstart/"
+      },
+      {
+        "label": "Статус",
+        "url": "https://docs.selectel.ru/"
+      },
+      {
+        "label": "Модели",
+        "url": "https://promo.selectel.ru/ai-router"
+      }
+    ]
+  },
+  {
+    "id": "timeweb",
+    "name": "Timeweb Cloud AI Gateway",
+    "website": "https://timeweb.cloud/services/ai-gateway",
+    "referral": null,
+    "card": true,
+    "payment": "Общий баланс от 500 ₽, российская карта или СБП. API-ключ 1 ₽/мес.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://api.timeweb.ai/v1",
+    "sources": [
+      {
+        "label": "Карты",
+        "url": "https://timeweb.cloud/docs/service-payments/usloviya-privyazki-karty-dlya-avtomaticheskogo-popolneniya-balansa"
+      },
+      {
+        "label": "Минимум",
+        "url": "https://timeweb.cloud/docs/service-payments/balance-top-up"
+      },
+      {
+        "label": "API и ключи",
+        "url": "https://timeweb.cloud/docs/ai-gateway/manage"
+      },
+      {
+        "label": "Каталог API",
+        "url": "https://timeweb.cloud/docs/ai-gateway"
+      },
+      {
+        "label": "Модели",
+        "url": "https://timeweb.cloud/services/ai-gateway"
+      }
+    ]
+  },
+  {
+    "id": "alltokens",
+    "name": "AllTokens",
+    "website": "https://alltokens.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Рублёвое пополнение картой любого банка или через СБП по описанию сервиса.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://api.alltokens.ru/api/v1",
+    "sources": [
+      {
+        "label": "Оплата, API и модели",
+        "url": "https://alltokens.ru/"
+      }
+    ]
+  },
+  {
+    "id": "bothub",
+    "name": "BotHub",
+    "website": "https://bothub.chat/ru",
+    "referral": null,
+    "card": true,
+    "payment": "В кабинете указан «МИР / российский банк - рубли». Запросы оплачиваются в Caps, курс зависит от пакета.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://openai.bothub.chat/v1",
+    "sources": [
+      {
+        "label": "Кабинет",
+        "url": "https://bothub.chat/ru/profile"
+      },
+      {
+        "label": "API",
+        "url": "https://bothub.chat/profile/for-developers/"
+      },
+      {
+        "label": "Биллинг и модели",
+        "url": "https://bothub.chat/ru/blog/bothub-vs-openrouter-api-llm"
+      }
+    ]
+  },
+  {
+    "id": "yandex",
+    "name": "Yandex AI Studio",
+    "website": "https://aistudio.yandex.ru",
+    "referral": null,
+    "card": true,
+    "payment": "Для резидентов РФ Yandex Cloud принимает российские «Мир», Visa, Mastercard. Оплата в рублях.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://ai.api.cloud.yandex.net/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://yandex.cloud/ru/docs/billing/qa/payment"
+      },
+      {
+        "label": "API",
+        "url": "https://yandex.cloud/ru/docs/tutorials/security/traces-for-litellm-proxy"
+      },
+      {
+        "label": "Авторизация",
+        "url": "https://aistudio.yandex.ru/ru/docs/ai-studio/api-ref/authentication"
+      },
+      {
+        "label": "Модели",
+        "url": "https://aistudio.yandex.ru/ru/docs/ai-studio/concepts/generation/models"
+      }
+    ]
+  },
+  {
+    "id": "mws",
+    "name": "MWS GPT Model Hub",
+    "website": "https://mws.ru/cloud-platform/model-hub",
+    "referral": null,
+    "card": true,
+    "payment": "Карта российского банка для физлиц. Юрлица платят с расчётного счёта.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://gpt.mwsapis.ru/projects/<имя проекта>/openai/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://mws.ru/docs/cloud-platform/about/quickstart.html"
+      },
+      {
+        "label": "API",
+        "url": "https://mws.ru/docs/cloud-platform/gpt/general/inference-text.html"
+      },
+      {
+        "label": "Модели",
+        "url": "https://mws.ru/cloud-platform/model-hub/"
+      }
+    ]
+  },
+  {
+    "id": "token-factory",
+    "name": "Selectel Token Factory",
+    "website": "https://selectel.ru/services/token-factory",
+    "referral": null,
+    "card": true,
+    "payment": "Общий баланс от 200 ₽, «Мир» и российские Visa/Mastercard.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://api.tf.selcloud.ru/v1",
+    "sources": [
+      {
+        "label": "Оплата",
+        "url": "https://docs.selectel.ru/balance-and-payments/manage/top-up-balance/"
+      },
+      {
+        "label": "API",
+        "url": "https://docs.selectel.ru/token-factory/quickstart/"
+      },
+      {
+        "label": "Продукт",
+        "url": "https://docs.selectel.ru/en/token-factory/about/about-token-factory/"
+      },
+      {
+        "label": "Биллинг",
+        "url": "https://docs.selectel.ru/en/token-factory/about/payment/"
+      }
+    ]
+  },
+  {
+    "id": "cloudru",
+    "name": "Cloud.ru Evolution Foundation Models",
+    "website": "https://cloud.ru",
+    "referral": null,
+    "card": false,
+    "payment": "Для физлиц опубликовано пополнение общего баланса банковской картой или SberPay от 100 ₽. Страна выпуска карты и доступность конкретного партнёрского Claude для нового аккаунта требуют подтверждения. Есть OpenAI Chat Completions по базовому адресу https://foundation-models.api.cloud.ru/v1 с Bearer. В тарифе перечислены Claude Sonnet 4.6 и 5.5.",
+    "status": "researched",
+    "protocols": [
+      "chat"
+    ],
+    "api": "https://foundation-models.api.cloud.ru/v1",
+    "sources": [
+      {
+        "label": "Пополнение",
+        "url": "https://cloud.ru/docs/billing/ug/topics/guides__payment_fl"
+      },
+      {
+        "label": "API",
+        "url": "https://cloud.ru/docs/foundation-models/ug/topics/quickstart"
+      },
+      {
+        "label": "Тариф",
+        "url": "https://cloud.ru/documents/tariffs/evolution/foundation-models"
+      }
+    ]
+  },
+  {
+    "id": "gigachat",
+    "name": "GigaChat API напрямую",
+    "website": "https://developers.sber.ru/gigachat",
+    "referral": null,
+    "card": false,
+    "payment": "С 1 сентября 2026 года страницы тарифов направляют новых платящих клиентов на Cloud.ru. Оферта для физлиц описывает оплату картой для действующих клиентов без уточнения страны выпуска. Прямой API использует отдельный OAuth-обмен.",
+    "status": "researched",
+    "protocols": [],
+    "api": null,
+    "sources": [
+      {
+        "label": "Тарифы физлиц",
+        "url": "https://developers.sber.ru/docs/ru/gigachat/tariffs/individual-tariffs"
+      },
+      {
+        "label": "Тарифы юрлиц",
+        "url": "https://developers.sber.ru/docs/ru/gigachat/tariffs/legal-tariffs"
+      },
+      {
+        "label": "Оферта",
+        "url": "https://developers.sber.ru/docs/ru/policies/gigachat-agreement/individuals"
+      },
+      {
+        "label": "API",
+        "url": "https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api"
+      }
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "website": "https://openrouter.ai",
+    "referral": null,
+    "card": false,
+    "payment": "Sift Gate поддерживает оба формата через встроенный адаптер. OpenRouter проводит карточные покупки кредитов через Stripe. Stripe исключает «Мир» и считает успешную оплату российской картой маловероятной.",
+    "status": "built-in",
+    "protocols": [
+      "chat",
+      "messages"
+    ],
+    "api": "https://openrouter.ai/api/v1",
+    "sources": [
+      {
+        "label": "Условия OpenRouter",
+        "url": "https://openrouter.ai/terms"
+      },
+      {
+        "label": "Messages",
+        "url": "https://openrouter.ai/docs/api/api-reference/anthropic-messages/create-messages?explorer=true"
+      },
+      {
+        "label": "Stripe",
+        "url": "https://support.stripe.com/questions/sanctions-on-russia-and-belarus"
+      }
+    ]
+  }
+]

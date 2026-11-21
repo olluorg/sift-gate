@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121713">
+  <title>Sift Gate</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body >
+<header class="top"><div class="wrap bar"><a class="brand" href="./"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a  href="./providers/">Провайдеры</a><a  href="./models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><div><p class="eyebrow">Rust · LLM API</p><h1>Один интерфейс.<br>Несколько LLM API.</h1>
+<p class="lead">Sift Gate маршрутизирует запросы по цене и задержке и переключается на доступного провайдера при сбое.</p>
+<div class="actions"><a class="button" href="./models/">Сравнить цены моделей</a><a class="button secondary" href="./providers/">Посмотреть провайдеров</a></div></div>
+<div class="snippet"><p class="eyebrow">sift-gate.toml</p><pre><code><span class="muted">[providers.aitunnel]</span>
+kind = <span>"ai_tunnel"</span>
+api_key_env = <span>"AITUNNEL_API_KEY"</span>
+
+<span class="muted">[[models.claude]]</span>
+provider = <span>"aitunnel"</span>
+model = <span>"claude-sonnet-5.5"</span>
+protocols = [<span>"chat_completions"</span>, <span>"anthropic_messages"</span>]</code></pre></div>
+</section>
+<section class="links"><article><h2>Провайдеры</h2><p>Карты российских банков, способы оплаты, протоколы и статус подключения к Sift Gate.</p><a href="./providers/">Открыть список провайдеров</a></article><article><h2>Модели</h2><p>Поиск по версиям моделей и сравнение стоимости запроса у разных провайдеров.</p><a href="./models/">Открыть каталог моделей</a></article></section></main>
+<footer class="wrap footer"><a class="brand" href="./">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
+</body>
+</html>
