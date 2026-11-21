@@ -1,6 +1,6 @@
 # Sift Gate
 
-[Документация проекта](https://olluorg.github.io/sift-gate/) · [Провайдеры](https://olluorg.github.io/sift-gate/providers/) · [Цены моделей](https://olluorg.github.io/sift-gate/models/)
+[Руководство](https://olluorg.github.io/sift-gate/docs/) · [Справочник API Rust](https://olluorg.github.io/sift-gate/api/sift_gate/) · [Провайдеры](https://olluorg.github.io/sift-gate/providers/) · [Цены моделей](https://olluorg.github.io/sift-gate/models/)
 
 Асинхронная Rust-библиотека для маршрутизации LLM-запросов между OpenRouter, RouterAI, Polza.ai и подключаемыми провайдерами. Точки входа `chat_completions` и `messages` принимают JSON в форматах OpenAI Chat Completions и Anthropic Messages. Библиотека подставляет ID модели из маршрута и передаёт остальные поля, включая tools, tool results и изображения на входе. Поддержка конкретного поля зависит от выбранных модели и провайдера.
 

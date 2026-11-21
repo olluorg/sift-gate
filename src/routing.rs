@@ -14,13 +14,17 @@ use crate::{
     scoring::BuiltinPolicy,
 };
 
+/// Результат запроса с фактически выбранным маршрутом.
 pub struct RoutedResponse {
+    /// Имя провайдера из конфигурации.
     pub provider: String,
+    /// API ID модели у провайдера.
     pub model: String,
     pub response: ProviderResponse,
 }
 
 #[derive(Clone)]
+/// Роутер LLM-запросов. Клоны разделяют кэш цен, телеметрию и circuit breaker.
 pub struct SiftGate(Arc<Inner>);
 
 struct Inner {
@@ -176,10 +180,12 @@ impl Drop for Attempt {
 }
 
 impl SiftGate {
+    /// Создаёт роутер со встроенными HTTP-адаптерами.
     pub fn new(config: Config) -> Result<Self, Error> {
         Self::with_extensions(config, HashMap::new(), None)
     }
 
+    /// Создаёт роутер с пользовательскими адаптерами или стратегией оценки.
     pub fn with_extensions(
         config: Config,
         mut adapters: HashMap<String, Arc<dyn ProviderAdapter>>,
@@ -231,14 +237,17 @@ impl SiftGate {
         })))
     }
 
+    /// Отправляет JSON-запрос в формате OpenAI Chat Completions.
     pub async fn chat_completions(&self, body: Value) -> Result<RoutedResponse, Error> {
         self.send(Protocol::ChatCompletions, body).await
     }
 
+    /// Отправляет JSON-запрос в формате Anthropic Messages.
     pub async fn messages(&self, body: Value) -> Result<RoutedResponse, Error> {
         self.send(Protocol::AnthropicMessages, body).await
     }
 
+    /// Возвращает замеры маршрута по имени провайдера, API ID модели и протоколу.
     pub fn telemetry(&self, provider: &str, model: &str, protocol: Protocol) -> Option<Telemetry> {
         self.0
             .providers
@@ -246,6 +255,7 @@ impl SiftGate {
             .map(|provider| provider.telemetry(model, protocol))
     }
 
+    /// Выбирает маршрут для заданного протокола. Поле `model` содержит алиас из конфигурации.
     pub async fn send(&self, protocol: Protocol, mut body: Value) -> Result<RoutedResponse, Error> {
         let alias = body["model"]
             .as_str()

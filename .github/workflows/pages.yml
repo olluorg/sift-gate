@@ -26,6 +26,10 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/configure-pages@v5
       - run: python3 scripts/build_catalog.py --refresh
+      - name: Build Rust API documentation
+        run: |
+          cargo +stable doc --locked --no-deps
+          cp -R target/doc site-dist/api
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site-dist

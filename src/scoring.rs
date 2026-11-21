@@ -3,9 +3,13 @@ use serde::Deserialize;
 use crate::Route;
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq)]
+/// Встроенный способ ранжирования маршрутов.
 pub enum Strategy {
+    /// Сравнивает сглаженное время ответа или время до первого содержательного SSE-события.
     LowestLatency,
+    /// Сравнивает оценочную цену запроса по каталогам провайдеров.
     LowestCost,
+    /// Смешивает нормализованные оценки задержки и стоимости.
     Balanced,
 }
 

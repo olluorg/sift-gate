@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121713">
+  <title>Документация · Sift Gate</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="top"><div class="wrap bar"><a class="brand" href="../"><span class="mark" aria-hidden="true">S</span>Sift Gate</a><nav aria-label="Основная навигация"><a aria-current="page" href="../docs/">Документация</a><a href="../providers/">Провайдеры</a><a href="../models/">Модели</a><a href="https://github.com/olluorg/sift-gate">GitHub</a></nav></div></header>
+<main class="wrap docs">
+<section class="intro"><h1>Документация</h1><p class="lead">Подключите Sift Gate к Rust-приложению и настройте маршрутизацию LLM-запросов.</p><a href="../api/sift_gate/">Справочник API Rust</a></section>
+<nav class="actions" aria-label="Разделы документации"><a href="#setup">Подключение</a><a href="#requests">Запросы и стриминг</a><a href="#routing">Маршрутизация и сбои</a><a href="#extensions">Расширения</a></nav>
+<section id="setup">
+<h2>Подключение</h2>
+<p>Клонируйте репозиторий рядом с приложением и добавьте зависимости в его <code>Cargo.toml</code>. Для сборки нужен Rust с поддержкой edition 2024.</p>
+<pre><code>git clone https://github.com/olluorg/sift-gate.git</code></pre>
+<pre><code>[dependencies]
+sift-gate = { path = "../sift-gate" }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde_json = "1"</code></pre>
+<p>Создайте <code>sift-gate.toml</code> в рабочем каталоге приложения. Этот минимальный конфиг направляет алиас <code>claude</code> в AITUNNEL. Задайте <code>AITUNNEL_API_KEY</code> в окружении перед запуском.</p>
+<pre><code>strategy = "Balanced"
+
+[providers.aitunnel]
+kind = "ai_tunnel"
+api_key_env = "AITUNNEL_API_KEY"
+
+[[models.claude]]
+provider = "aitunnel"
+model = "claude-sonnet-5.5"
+protocols = ["chat_completions", "anthropic_messages"]</code></pre>
+<p>Один алиас может иметь несколько записей <code>[[models.claude]]</code>. У каждой укажите провайдера, его API ID модели и допустимые протоколы. <a href="../sift-gate.ru.example.toml">Пример с AITUNNEL и ProxyAPI</a> · <a href="../providers/">Список провайдеров</a></p>
+</section>
+<section id="requests">
+<h2>Запросы и стриминг</h2>
+<pre><code>use serde_json::json;
+use sift_gate::{Config, Error, ProviderResponse, SiftGate};
+
+#[tokio::main]
+async fn main() -&gt; Result&lt;(), Error&gt; {
+    let gate = SiftGate::new(Config::from_file("sift-gate.toml")?)?;
+    let result = gate.chat_completions(json!({
+        "model": "claude",
+        "messages": [{"role": "user", "content": "Привет!"}],
+        "max_completion_tokens": 256
+    })).await?;
+
+    println!("{} / {}", result.provider, result.model);
+    if let ProviderResponse::Json(body) = result.response {
+        println!("{body}");
+    }
+    Ok(())
+}</code></pre>
+<p>Для Anthropic вызывайте <code>gate.messages(body)</code> с полем <code>max_tokens</code>. Библиотека подставляет API ID модели и передаёт остальные поля провайдеру. При <code>"stream": true</code> результат приходит как <code>ProviderResponse::Stream</code>. Читайте события через <code>futures_util::StreamExt::next</code> и обрабатывайте ошибки каждого события. Переиспользуйте экземпляр <code>SiftGate</code>, чтобы сохранить кэш и телеметрию.</p>
+</section>
+<section id="routing">
+<h2>Маршрутизация и сбои</h2>
+<dl>
+<dt><code>LowestCost</code></dt><dd>Сравнивает оценочную стоимость запроса. Маршруты без сопоставимой цены идут после маршрутов с ценой. Для смешанных RUB и USD задайте <code>rub_per_usd</code>.</dd>
+<dt><code>LowestLatency</code></dt><dd>Сравнивает сглаженную задержку. Для SSE используется время до первого содержательного события, для JSON — время до полного ответа.</dd>
+<dt><code>Balanced</code></dt><dd>Смешивает оценки цены и задержки. Доля задержки задаётся параметром <code>latency_weight</code>.</dd>
+</dl>
+<p>При временном сбое роутер может попробовать следующий подходящий маршрут. После первого выданного SSE-события обрыв возвращается как ошибка потока. <code>timeout_ms</code> применяется к каждой попытке. Чтобы не повторять запрос после таймаута, задайте <code>retry_timeouts = false</code>.</p>
+<p>Метод <code>gate.telemetry(provider, model, protocol)</code> возвращает замеры конкретного маршрута. Используйте API ID модели провайдера.</p>
+</section>
+<section id="extensions">
+<h2>Расширения</h2>
+<p>Для OpenAI-совместимого API используйте <code>kind = "compatible"</code> с <code>base_url</code> и <code>api_key_env</code>. Для нестандартного транспорта или авторизации реализуйте <a href="../api/sift_gate/trait.ProviderAdapter.html"><code>ProviderAdapter</code></a> и зарегистрируйте адаптер через <code>SiftGate::with_extensions</code>. Для собственной стратегии реализуйте <a href="../api/sift_gate/trait.ScoringPolicy.html"><code>ScoringPolicy</code></a>.</p>
+</section>
+</main>
+<footer class="wrap footer"><a class="brand" href="../">Sift Gate</a><a href="https://github.com/olluorg/sift-gate">Исходный код на GitHub</a></footer>
+</body>
+</html>
