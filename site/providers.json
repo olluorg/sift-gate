@@ -507,33 +507,5 @@
         "url": "https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api"
       }
     ]
-  },
-  {
-    "id": "openrouter",
-    "name": "OpenRouter",
-    "website": "https://openrouter.ai",
-    "referral": null,
-    "card": false,
-    "payment": "Sift Gate поддерживает оба формата через встроенный адаптер. OpenRouter проводит карточные покупки кредитов через Stripe. Stripe исключает «Мир» и считает успешную оплату российской картой маловероятной.",
-    "status": "built-in",
-    "protocols": [
-      "chat",
-      "messages"
-    ],
-    "api": "https://openrouter.ai/api/v1",
-    "sources": [
-      {
-        "label": "Условия OpenRouter",
-        "url": "https://openrouter.ai/terms"
-      },
-      {
-        "label": "Messages",
-        "url": "https://openrouter.ai/docs/api/api-reference/anthropic-messages/create-messages?explorer=true"
-      },
-      {
-        "label": "Stripe",
-        "url": "https://support.stripe.com/questions/sanctions-on-russia-and-belarus"
-      }
-    ]
   }
 ]

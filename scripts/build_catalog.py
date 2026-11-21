@@ -13,7 +13,6 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 FEEDS = {
-    "openrouter": "https://openrouter.ai/api/v1/models",
     "routerai": "https://routerai.ru/api/v1/models",
     "polza": "https://polza.ai/api/v1/models",
     "aitunnel": "https://api.aitunnel.ru/public/aitunnel/models/chat",
@@ -76,7 +75,7 @@ def offers(provider, data):
             token_rates = all(units.get(field, "token") == "token" for field in ("prompt", "completion"))
             input_price = price.get("prompt") if token_rates else None
             output_price = price.get("completion") if token_rates else None
-            currency, scale = price.get("currency", "USD" if provider == "openrouter" else "RUB"), 1_000_000
+            currency, scale = price.get("currency", "RUB"), 1_000_000
         yield offer(provider, model_id, model_id, model.get("name") or model_id, protocols,
                     currency, input_price, output_price, price.get("request", 0), scale)
 
