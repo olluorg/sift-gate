@@ -58,10 +58,24 @@ body.docs-page {
 .syntax-keyword { color: #f5bfda; }
 .syntax-section { color: #a2d7f5; }
 .syntax-number { color: #ffd197; }
-.strategy-list { display: grid; gap: .6rem; }
-.strategy-list > div { display: grid; grid-template-columns: 10rem 1fr; gap: .8rem; border: 1px solid var(--line); background: #fff; border-radius: .55rem; padding: .85rem; }
-.strategy-list dt { font-weight: 700; }
-.strategy-list dd { margin: 0; color: var(--muted); }
+.routing-charts { display: grid; gap: .85rem; }
+.routing-chart { margin: 0; padding: clamp(.7rem, 2.5vw, 1.2rem); border: 1px solid var(--line); background: #fff; border-radius: .68rem; }
+.routing-chart figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem .8rem; color: var(--muted); margin-bottom: .85rem; }
+.routing-chart figcaption strong { color: var(--ink); font-size: 1.05rem; }
+.chart-rows { display: grid; gap: .48rem; }
+.chart-row { display: grid; grid-template-columns: 5.8rem minmax(0, 1fr) 4.3rem; align-items: center; gap: .45rem; font-size: .875rem; }
+.chart-row output { text-align: right; font-variant-numeric: tabular-nums; }
+.chart-track { display: block; height: .65rem; background: #ebf1ec; border-radius: .2rem; }
+.chart-bar { display: block; width: var(--fill); height: 100%; background: #799487; border-radius: inherit; }
+.chart-row.preferred { color: #164e33; font-weight: 750; }
+.chart-row.preferred .chart-bar { background: #25704d; }
+.routing-chart .chart-result { margin: .7rem 0 0; font-size: .875rem; color: #164e33; font-weight: 750; }
+.routing-chart .chart-note { margin: .65rem 0 0; color: var(--muted); font-size: .875rem; }
+.chart-control { margin-top: .75rem; padding-top: .65rem; border-top: 1px solid var(--line); }
+.chart-control label, #weight-description { display: flex; justify-content: space-between; gap: .5rem; }
+.chart-control label { font-weight: 650; font-size: .9rem; }
+.chart-control input { display: block; appearance: auto; accent-color: #25704d; padding: 0; margin: .4rem 0; }
+#weight-description { color: var(--muted); font-size: .85rem; }
 .docs-page .footer { color: var(--muted); }
 @media (max-width: 56rem) {
   .docs-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
@@ -73,7 +87,6 @@ body.docs-page {
 }
 @media (max-width: 30rem) {
   .docs-break { display: none; }
-  .strategy-list > div { grid-template-columns: 1fr; gap: .3rem; }
   .docs-page .bar { align-items: flex-start; }
   .docs-page .bar nav { gap: .45rem 1rem; }
 }

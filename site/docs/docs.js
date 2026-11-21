@@ -38,3 +38,34 @@ function activeSection() {
 window.addEventListener("scroll", activeSection, { passive: true });
 window.addEventListener("hashchange", activeSection);
 activeSection();
+
+const balanced = document.querySelector('[data-strategy="Balanced"]');
+const weight = document.getElementById("latency-weight");
+const scores = [...balanced.querySelectorAll(".chart-row")];
+const values = (strategy) => [...document.querySelectorAll(`[data-strategy="${strategy}"] [data-value]`)]
+  .map((value) => Number(value.dataset.value));
+const normalize = (items) => {
+  const min = Math.min(...items);
+  const max = Math.max(...items);
+  return items.map((item) => max === min ? 0 : (item - min) / (max - min));
+};
+const latency = normalize(values("LowestLatency"));
+const cost = normalize(values("LowestCost"));
+const format = new Intl.NumberFormat("ru", { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+
+function updateScores() {
+  const latencyWeight = weight.valueAsNumber / 100;
+  const estimates = latency.map((delay, index) => latencyWeight * delay + (1 - latencyWeight) * cost[index]);
+  const best = estimates.indexOf(Math.min(...estimates));
+  for (const [index, row] of scores.entries()) {
+    row.classList.toggle("preferred", index === best);
+    row.querySelector(".chart-bar").style.setProperty("--fill", `${estimates[index] * 100}%`);
+    row.querySelector("output").textContent = format.format(estimates[index]);
+  }
+  document.getElementById("latency-weight-value").value = `${weight.value}%`;
+  balanced.querySelector(".chart-result").textContent = `${"ABC"[best]} — минимальная оценка`;
+}
+
+weight.closest(".chart-control").hidden = false;
+weight.addEventListener("input", updateScores);
+updateScores();
